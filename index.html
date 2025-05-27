@@ -1,0 +1,1924 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueRise - Mô phỏng tương tác</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .simulation-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .progress-indicator {
+            transition: width 0.5s ease-in-out;
+        }
+        .benefit-icon {
+            transition: all 0.3s ease;
+        }
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1);
+        }
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        .pricing-card.highlighted {
+            border: 2px solid #3B82F6;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <h1 class="text-3xl font-bold mb-4 md:mb-0">BlueRise</h1>
+                <div class="flex space-x-4">
+                    <button class="tab-btn bg-white text-blue-600 px-4 py-2 rounded-md font-medium active" data-tab="overview">Tổng quan</button>
+                    <button class="tab-btn bg-transparent hover:bg-blue-700 border border-white text-white px-4 py-2 rounded-md font-medium" data-tab="simulation">Mô phỏng</button>
+                    <button class="tab-btn bg-transparent hover:bg-blue-700 border border-white text-white px-4 py-2 rounded-md font-medium" data-tab="analytics">Phân tích</button>
+                    <button class="tab-btn bg-transparent hover:bg-blue-700 border border-white text-white px-4 py-2 rounded-md font-medium" data-tab="pricing">Bảng giá</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Tab 1: Tổng quan -->
+        <div id="overview" class="tab-content active">
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">BlueRise mang lại gì cho trung tâm của bạn?</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Benefit Card 1 -->
+                    <div class="benefit-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                        <div class="flex items-center mb-4">
+                            <div class="benefit-icon bg-blue-100 p-3 rounded-full mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-800">Tinh gọn bộ máy, nhân sự</h3>
+                        </div>
+                        <p class="text-gray-600">Tối ưu hóa quy trình làm việc, giảm thiểu nhân sự thừa và tăng hiệu suất làm việc của đội ngũ.</p>
+                    </div>
+
+                    <!-- Benefit Card 2 -->
+                    <div class="benefit-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                        <div class="flex items-center mb-4">
+                            <div class="benefit-icon bg-blue-100 p-3 rounded-full mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-800">Quản trị chất lượng đào tạo</h3>
+                        </div>
+                        <p class="text-gray-600">Theo dõi và đánh giá chất lượng giảng dạy, nội dung khóa học và kết quả học tập một cách toàn diện.</p>
+                    </div>
+
+                    <!-- Benefit Card 3 -->
+                    <div class="benefit-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                        <div class="flex items-center mb-4">
+                            <div class="benefit-icon bg-blue-100 p-3 rounded-full mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-800">Tăng năng suất nhân sự</h3>
+                        </div>
+                        <p class="text-gray-600">Tự động hóa các công việc hành chính, giúp nhân viên tập trung vào nhiệm vụ chuyên môn và sáng tạo.</p>
+                    </div>
+
+                    <!-- Benefit Card 4 -->
+                    <div class="benefit-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                        <div class="flex items-center mb-4">
+                            <div class="benefit-icon bg-blue-100 p-3 rounded-full mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-800">Tiết kiệm thời gian, chi phí</h3>
+                        </div>
+                        <p class="text-gray-600">Giảm thiểu thời gian xử lý công việc hành chính, tiết kiệm chi phí vận hành và quản lý trung tâm.</p>
+                    </div>
+
+                    <!-- Benefit Card 5 -->
+                    <div class="benefit-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                        <div class="flex items-center mb-4">
+                            <div class="benefit-icon bg-blue-100 p-3 rounded-full mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-800">Nâng cao giá trị thương hiệu</h3>
+                        </div>
+                        <p class="text-gray-600">Tạo ấn tượng chuyên nghiệp với khách hàng thông qua hệ thống quản lý hiện đại và trải nghiệm học tập tốt hơn.</p>
+                    </div>
+
+                    <!-- Benefit Card 6 -->
+                    <div class="benefit-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                        <div class="flex items-center mb-4">
+                            <div class="benefit-icon bg-blue-100 p-3 rounded-full mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-800">Dữ liệu phù hợp tích hợp AI</h3>
+                        </div>
+                        <p class="text-gray-600">Thu thập và phân tích dữ liệu học tập, hỗ trợ ra quyết định thông minh và cá nhân hóa trải nghiệm học tập.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">Giải pháp chuyển đổi số toàn diện</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- BlueRise ERP -->
+                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="bg-blue-600 text-white p-4">
+                            <h3 class="text-xl font-bold">Blue Rise ERP</h3>
+                            <p class="text-blue-100">Quản trị toàn diện trung tâm đào tạo</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <img src="/image/erp.png" alt="Blue Rise ERP" class="w-full h-auto object-cover rounded-md">
+                            </div>
+                            <p class="text-gray-700 mb-4">Website quản trị toàn bộ hoạt động của trung tâm, chuỗi trung tâm và hành trình trải nghiệm của khách hàng.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>CRM và quản lý tuyển sinh</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Quản lý lịch học và ghi danh</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Quản lý học sinh và giáo viên</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Báo cáo doanh thu và thống kê</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BlueRise Edu -->
+                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="bg-green-600 text-white p-4">
+                            <h3 class="text-xl font-bold">Blue Rise Edu</h3>
+                            <p class="text-green-100">Công cụ chuyên biệt cho giáo viên</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <img src="/image/edu.png" alt="Blue Rise Edu" class="w-full h-auto object-cover rounded-md">
+                            </div>
+                            <p class="text-gray-700 mb-4">Trang làm việc dành riêng cho giáo viên với các nhóm tính năng chuyên biệt hỗ trợ quản lý lớp học.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Quản lý thông tin lớp học</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Soạn thảo bài giảng và đề thi</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Nhận xét và chấm điểm tự động</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Tra cứu dữ liệu điểm danh, công, lương</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BlueRise PC App -->
+                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="bg-purple-600 text-white p-4">
+                            <h3 class="text-xl font-bold">Blue Rise PC App</h3>
+                            <p class="text-purple-100">Môi trường giảng dạy và học tập online</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <img src="/image/pcapp.png" alt="Blue Rise PC App" class="w-full h-auto object-cover rounded-md">
+                            </div>
+                            <p class="text-gray-700 mb-4">Mô phỏng 80% lớp học truyền thông với đầy đủ các công cụ tương tác hàng đầu trên thị trường.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Bảng đen và bộ đếm giờ</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Bộ dụng cụ học tập</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Công cụ tạo game</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Trao cúp vinh danh và công cụ cử chỉ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BlueRise Mobile App -->
+                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="bg-red-600 text-white p-4">
+                            <h3 class="text-xl font-bold">Blue Rise Mobile App</h3>
+                            <p class="text-red-100">Kết nối trung tâm, phụ huynh và học sinh</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <img src="/image/mobile.png" alt="Blue Rise Mobile App" class="w-full h-auto object-cover rounded-md">
+                            </div>
+                            <p class="text-gray-700 mb-4">Ứng dụng hoàn hảo tương tác giữa trung tâm, phụ huynh và học sinh với nhiều tính năng tiện ích.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Thông báo lịch học và học phí</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Đánh giá năng lực và điểm số</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Làm bài tập và kiểm tra</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Đơn xin nghỉ và sổ liên lạc điện tử</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">Những con số đáng tự hào</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl font-bold text-blue-600 mb-2">98%</div>
+                        <div class="text-xl text-gray-700">Tỷ lệ hài lòng của khách hàng</div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl font-bold text-blue-600 mb-2">Tăng 1,5 lần</div>
+                        <div class="text-xl text-gray-700">Tốc độ quản trị công việc</div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl font-bold text-blue-600 mb-2">Giảm 40%</div>
+                        <div class="text-xl text-gray-700">Chi phí vận hành trung tâm</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Tab 2: Mô phỏng -->
+        <div id="simulation" class="tab-content">
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">Mô phỏng hoạt động của BlueRise</h2>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-700">Bạn muốn khám phá điều gì?</h3>
+                    <div class="flex flex-wrap gap-3 mb-6">
+                        <button class="sim-btn px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 active" data-sim="enrollment">Quy trình tuyển sinh</button>
+                        <button class="sim-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300" data-sim="teaching">Quản lý giảng dạy</button>
+                        <button class="sim-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300" data-sim="finance">Quản lý tài chính</button>
+                        <button class="sim-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300" data-sim="communication">Giao tiếp với phụ huynh</button>
+                    </div>
+                    
+                    <div class="simulation-container bg-gray-100 p-4 rounded-lg min-h-[400px]">
+                        <!-- Quy trình tuyển sinh -->
+                        <div id="enrollment-sim" class="sim-content active">
+                            <h4 class="text-lg font-semibold mb-4">Quy trình tuyển sinh với BlueRise</h4>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>Tiến độ mô phỏng</span>
+                                    <span id="enrollment-progress-text">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-300 rounded-full h-2.5">
+                                    <div id="enrollment-progress" class="progress-indicator bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <div id="enrollment-step-1" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white">
+                                        <h5 class="font-semibold text-blue-700">Bước 1: Tiếp nhận thông tin học viên tiềm năng</h5>
+                                        <p class="text-gray-600 mt-2">Hệ thống tự động lưu trữ thông tin học viên từ nhiều nguồn: website, form đăng ký, mạng xã hội, và cuộc gọi.</p>
+                                    </div>
+                                    
+                                    <div id="enrollment-step-2" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 2: Phân loại và đánh giá</h5>
+                                        <p class="text-gray-600 mt-2">Hệ thống tự động phân loại học viên theo nhu cầu, độ tuổi, trình độ và gán cho nhân viên tư vấn phù hợp.</p>
+                                    </div>
+                                    
+                                    <div id="enrollment-step-3" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 3: Tư vấn và đăng ký</h5>
+                                        <p class="text-gray-600 mt-2">Nhân viên tư vấn sử dụng thông tin từ hệ thống để tư vấn khóa học phù hợp và hoàn tất đăng ký trực tiếp trên hệ thống.</p>
+                                    </div>
+                                    
+                                    <div id="enrollment-step-4" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 4: Xếp lớp và thanh toán</h5>
+                                        <p class="text-gray-600 mt-2">Hệ thống tự động đề xuất lớp học phù hợp dựa trên lịch trống của học viên và xử lý thanh toán học phí.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg border border-gray-300">
+                                    <h5 class="font-semibold text-blue-700 mb-3">Thông tin chi tiết</h5>
+                                    <div id="enrollment-detail" class="text-gray-700">
+                                        <p class="mb-3">Khi học viên tiềm năng điền thông tin vào form trên website hoặc mạng xã hội, BlueRise sẽ:</p>
+                                        <ul class="list-disc pl-5 space-y-2">
+                                            <li>Tự động lưu trữ thông tin vào hệ thống CRM</li>
+                                            <li>Gửi email/SMS xác nhận đã nhận thông tin</li>
+                                            <li>Phân loại học viên theo nguồn đến (website, Facebook, Instagram...)</li>
+                                            <li>Gán nhãn tự động dựa trên thông tin đã cung cấp</li>
+                                            <li>Thông báo cho nhân viên tư vấn phụ trách</li>
+                                        </ul>
+                                        <p class="mt-3">Thời gian xử lý: <span class="font-semibold text-green-600">Dưới 1 phút</span> (so với 5-10 phút khi làm thủ công)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 flex justify-between">
+                                <button id="enrollment-prev" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Trước</button>
+                                <button id="enrollment-next" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Tiếp theo</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Quản lý giảng dạy -->
+                        <div id="teaching-sim" class="sim-content hidden">
+                            <h4 class="text-lg font-semibold mb-4">Quản lý giảng dạy với BlueRise</h4>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>Tiến độ mô phỏng</span>
+                                    <span id="teaching-progress-text">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-300 rounded-full h-2.5">
+                                    <div id="teaching-progress" class="progress-indicator bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <div id="teaching-step-1" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white">
+                                        <h5 class="font-semibold text-blue-700">Bước 1: Lập kế hoạch giảng dạy</h5>
+                                        <p class="text-gray-600 mt-2">Giáo viên tạo kế hoạch giảng dạy, giáo án và tài liệu học tập trên hệ thống Blue Rise Edu.</p>
+                                    </div>
+                                    
+                                    <div id="teaching-step-2" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 2: Quản lý lớp học</h5>
+                                        <p class="text-gray-600 mt-2">Hệ thống tự động cập nhật danh sách học viên, lịch học và thông báo cho giáo viên và học viên.</p>
+                                    </div>
+                                    
+                                    <div id="teaching-step-3" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 3: Giảng dạy và tương tác</h5>
+                                        <p class="text-gray-600 mt-2">Giáo viên sử dụng Blue Rise PC App để giảng dạy trực tuyến với đầy đủ công cụ tương tác.</p>
+                                    </div>
+                                    
+                                    <div id="teaching-step-4" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 4: Đánh giá và phản hồi</h5>
+                                        <p class="text-gray-600 mt-2">Hệ thống hỗ trợ chấm điểm tự động, tạo báo cáo đánh giá và gửi phản hồi cho phụ huynh.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg border border-gray-300">
+                                    <h5 class="font-semibold text-blue-700 mb-3">Thông tin chi tiết</h5>
+                                    <div id="teaching-detail" class="text-gray-700">
+                                        <p class="mb-3">Khi giáo viên lập kế hoạch giảng dạy trên Blue Rise Edu:</p>
+                                        <ul class="list-disc pl-5 space-y-2">
+                                            <li>Tạo và lưu trữ giáo án theo chuẩn của trung tâm</li>
+                                            <li>Tải lên tài liệu học tập và bài tập</li>
+                                            <li>Thiết lập mục tiêu học tập cho từng buổi học</li>
+                                            <li>Xem thông tin chi tiết về học viên trong lớp</li>
+                                            <li>Truy cập lịch sử học tập và đánh giá trước đó</li>
+                                        </ul>
+                                        <p class="mt-3">Thời gian chuẩn bị: <span class="font-semibold text-green-600">Giảm 30%</span> so với phương pháp truyền thống</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 flex justify-between">
+                                <button id="teaching-prev" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Trước</button>
+                                <button id="teaching-next" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Tiếp theo</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Quản lý tài chính -->
+                        <div id="finance-sim" class="sim-content hidden">
+                            <h4 class="text-lg font-semibold mb-4">Quản lý tài chính với BlueRise</h4>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>Tiến độ mô phỏng</span>
+                                    <span id="finance-progress-text">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-300 rounded-full h-2.5">
+                                    <div id="finance-progress" class="progress-indicator bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <div id="finance-step-1" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white">
+                                        <h5 class="font-semibold text-blue-700">Bước 1: Thu học phí</h5>
+                                        <p class="text-gray-600 mt-2">Hệ thống tự động tính toán học phí, tạo hóa đơn và gửi thông báo thanh toán cho phụ huynh.</p>
+                                    </div>
+                                    
+                                    <div id="finance-step-2" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 2: Quản lý chi tiêu</h5>
+                                        <p class="text-gray-600 mt-2">Ghi nhận và phân loại các khoản chi phí vận hành, lương giáo viên và chi phí marketing.</p>
+                                    </div>
+                                    
+                                    <div id="finance-step-3" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 3: Tính lương giáo viên</h5>
+                                        <p class="text-gray-600 mt-2">Hệ thống tự động tính lương dựa trên số giờ dạy, thưởng và các chính sách của trung tâm.</p>
+                                    </div>
+                                    
+                                    <div id="finance-step-4" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 4: Báo cáo tài chính</h5>
+                                        <p class="text-gray-600 mt-2">Tạo báo cáo doanh thu, chi phí, lợi nhuận theo thời gian thực và dự báo tài chính.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg border border-gray-300">
+                                    <h5 class="font-semibold text-blue-700 mb-3">Thông tin chi tiết</h5>
+                                    <div id="finance-detail" class="text-gray-700">
+                                        <p class="mb-3">Khi học viên đăng ký khóa học, BlueRise sẽ:</p>
+                                        <ul class="list-disc pl-5 space-y-2">
+                                            <li>Tự động tính toán học phí dựa trên khóa học và chính sách giảm giá</li>
+                                            <li>Tạo hóa đơn điện tử và gửi cho phụ huynh qua email/app</li>
+                                            <li>Cung cấp nhiều phương thức thanh toán (tiền mặt, chuyển khoản, thẻ)</li>
+                                            <li>Ghi nhận thanh toán và cập nhật trạng thái học phí</li>
+                                            <li>Gửi thông báo nhắc nhở khi gần đến hạn thanh toán</li>
+                                        </ul>
+                                        <p class="mt-3">Hiệu quả: <span class="font-semibold text-green-600">Giảm 90%</span> thời gian xử lý học phí và <span class="font-semibold text-green-600">giảm 95%</span> sai sót</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 flex justify-between">
+                                <button id="finance-prev" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Trước</button>
+                                <button id="finance-next" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Tiếp theo</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Giao tiếp với phụ huynh -->
+                        <div id="communication-sim" class="sim-content hidden">
+                            <h4 class="text-lg font-semibold mb-4">Giao tiếp với phụ huynh qua BlueRise</h4>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span>Tiến độ mô phỏng</span>
+                                    <span id="communication-progress-text">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-300 rounded-full h-2.5">
+                                    <div id="communication-progress" class="progress-indicator bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <div id="communication-step-1" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white">
+                                        <h5 class="font-semibold text-blue-700">Bước 1: Thông báo lịch học</h5>
+                                        <p class="text-gray-600 mt-2">Hệ thống tự động gửi thông báo lịch học, thay đổi lịch và nhắc nhở trước giờ học.</p>
+                                    </div>
+                                    
+                                    <div id="communication-step-2" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 2: Cập nhật tiến độ học tập</h5>
+                                        <p class="text-gray-600 mt-2">Giáo viên cập nhật nhận xét, điểm số và tiến độ học tập sau mỗi buổi học.</p>
+                                    </div>
+                                    
+                                    <div id="communication-step-3" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 3: Phụ huynh theo dõi</h5>
+                                        <p class="text-gray-600 mt-2">Phụ huynh xem thông tin chi tiết về tiến độ học tập, điểm danh và học phí qua Mobile App.</p>
+                                    </div>
+                                    
+                                    <div id="communication-step-4" class="mb-4 p-4 border border-gray-300 rounded-lg bg-white opacity-50">
+                                        <h5 class="font-semibold text-blue-700">Bước 4: Tương tác hai chiều</h5>
+                                        <p class="text-gray-600 mt-2">Phụ huynh có thể gửi phản hồi, đơn xin nghỉ và trao đổi trực tiếp với giáo viên qua ứng dụng.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg border border-gray-300">
+                                    <h5 class="font-semibold text-blue-700 mb-3">Thông tin chi tiết</h5>
+                                    <div id="communication-detail" class="text-gray-700">
+                                        <p class="mb-3">Khi có lịch học mới hoặc thay đổi lịch, BlueRise sẽ:</p>
+                                        <ul class="list-disc pl-5 space-y-2">
+                                            <li>Gửi thông báo tự động qua Mobile App và SMS</li>
+                                            <li>Cập nhật lịch học trên ứng dụng của phụ huynh</li>
+                                            <li>Gửi nhắc nhở trước giờ học 30 phút</li>
+                                            <li>Thông báo khi học viên điểm danh vào lớp</li>
+                                            <li>Cung cấp thông tin về nội dung bài học sắp tới</li>
+                                        </ul>
+                                        <p class="mt-3">Kết quả: <span class="font-semibold text-green-600">Tăng 40%</span> tỷ lệ tham gia đúng giờ và <span class="font-semibold text-green-600">giảm 70%</span> cuộc gọi hỏi thông tin</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 flex justify-between">
+                                <button id="communication-prev" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Trước</button>
+                                <button id="communication-next" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Tiếp theo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Tab 3: Phân tích -->
+        <div id="analytics" class="tab-content">
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">Phân tích hiệu quả của BlueRise</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-700">Tiết kiệm thời gian</h3>
+                        <div class="chart-container">
+                            <canvas id="timeChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-gray-700">
+                            <p>BlueRise giúp tiết kiệm thời gian đáng kể trong các quy trình vận hành trung tâm, từ tuyển sinh đến quản lý học viên và báo cáo.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-700">Giảm chi phí vận hành</h3>
+                        <div class="chart-container">
+                            <canvas id="costChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-gray-700">
+                            <p>Tự động hóa các quy trình giúp giảm chi phí nhân sự, giấy tờ và các chi phí vận hành khác của trung tâm.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-700">Tăng hiệu quả tuyển sinh</h3>
+                        <div class="chart-container">
+                            <canvas id="enrollmentChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-gray-700">
+                            <p>Hệ thống CRM tự động giúp tăng tỷ lệ chuyển đổi từ học viên tiềm năng thành học viên chính thức.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-700">Cải thiện sự hài lòng</h3>
+                        <div class="chart-container">
+                            <canvas id="satisfactionChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-gray-700">
+                            <p>Trải nghiệm học tập và tương tác tốt hơn giúp tăng sự hài lòng của học viên và phụ huynh.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-700">So sánh hiệu quả trước và sau khi sử dụng BlueRise</h3>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Tiêu chí</th>
+                                    <th class="py-3 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Trước khi sử dụng</th>
+                                    <th class="py-3 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Sau khi sử dụng</th>
+                                    <th class="py-3 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Cải thiện</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200">Thời gian xử lý tuyển sinh</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">30-45 phút/học viên</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">5-10 phút/học viên</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-green-600 font-semibold">Giảm 80%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200">Chi phí nhân sự hành chính</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">3-5 nhân viên/trung tâm</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">1-2 nhân viên/trung tâm</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-green-600 font-semibold">Giảm 60%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200">Tỷ lệ chuyển đổi học viên</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">25-30%</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">40-45%</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-green-600 font-semibold">Tăng 50%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200">Thời gian báo cáo định kỳ</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">2-3 ngày/tháng</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">Tự động, thời gian thực</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-green-600 font-semibold">Giảm 100%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200">Tỷ lệ học viên tiếp tục đăng ký</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">60-65%</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">80-85%</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-green-600 font-semibold">Tăng 30%</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200">Sai sót trong quản lý học phí</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">5-8%</td>
+                                    <td class="py-3 px-4 border-b border-gray-200">Dưới 0.5%</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-green-600 font-semibold">Giảm 94%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-700">Phân tích ROI (Lợi nhuận đầu tư)</h3>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-2">Tính toán ROI cho trung tâm quy mô vừa (500 học viên)</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-medium text-gray-700 mb-2">Chi phí đầu tư</h5>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                                    <li>Phí sử dụng BlueRise: 39.000 VNĐ x 500 học viên x 12 tháng = 234.000.000 VNĐ/năm</li>
+                                    <li>Chi phí cloud lưu trữ: 5.000.000 VNĐ (một lần)</li>
+                                    <li>Tổng chi phí năm đầu: 239.000.000 VNĐ</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h5 class="font-medium text-gray-700 mb-2">Lợi ích kinh tế</h5>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                                    <li>Tiết kiệm nhân sự: 2-3 nhân viên = 240.000.000 VNĐ/năm</li>
+                                    <li>Tăng tỷ lệ chuyển đổi học viên: 100.000.000 VNĐ/năm</li>
+                                    <li>Giảm chi phí vận hành: 50.000.000 VNĐ/năm</li>
+                                    <li>Tổng lợi ích: 390.000.000 VNĐ/năm</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                            <p class="font-semibold text-blue-800">ROI năm đầu: (390.000.000 - 239.000.000) / 239.000.000 x 100% = <span class="text-green-600">63%</span></p>
+                            <p class="font-semibold text-blue-800 mt-1">ROI từ năm thứ hai: (390.000.000 - 234.000.000) / 234.000.000 x 100% = <span class="text-green-600">67%</span></p>
+                            <p class="text-gray-700 mt-2">Thời gian hoàn vốn: Khoảng 7-8 tháng</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Tab 4: Bảng giá -->
+        <div id="pricing" class="tab-content">
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8 text-blue-800">Lựa chọn phù hợp với quy mô</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Gói Basic -->
+                    <div class="pricing-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="bg-gray-800 text-white p-6 text-center">
+                            <h3 class="text-2xl font-bold">Basic</h3>
+                            <p class="text-gray-300 mt-1">Dưới 500 học viên</p>
+                            <div class="mt-4">
+                                <span class="text-sm">Chỉ từ</span>
+                                <div class="text-3xl font-bold">20.000 VNĐ</div>
+                                <span class="text-sm text-gray-300">/ Học viên / Tháng</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <button class="w-full py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 mb-6">Đăng ký ngay</button>
+                            
+                            <h4 class="font-semibold text-gray-800 mb-4">Bao gồm</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>CRM TỰ ĐỘNG toàn bộ quy trình tiếp thị & tuyển sinh</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Quản lý học viên</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Quản lý giảng dạy và học tập</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Quản lý vận hành trung tâm</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Gói Premium -->
+                    <div class="pricing-card highlighted bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="bg-blue-600 text-white p-6 text-center relative">
+                            <div class="absolute top-0 right-0 bg-yellow-500 text-xs font-bold px-3 py-1 transform translate-y-2 rotate-45">
+                                Phổ biến
+                            </div>
+                            <h3 class="text-2xl font-bold">Premium</h3>
+                            <p class="text-blue-100 mt-1">500-1000 học viên</p>
+                            <div class="mt-4">
+                                <span class="text-sm">Chỉ từ</span>
+                                <div class="text-3xl font-bold">39.000 VNĐ</div>
+                                <span class="text-sm text-blue-100">/ Học viên / Tháng</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <button class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 mb-6">Đăng ký ngay</button>
+                            
+                            <h4 class="font-semibold text-gray-800 mb-4">Bao gồm toàn bộ tính năng gói BASIC</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Web App: ERP Quản trị doanh nghiệp</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Web App: Education Hỗ trợ giảng dạy và học tập</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-blue-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Mobile App: Công cụ đa năng cho phụ huynh và học viên</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Gói Unlimited -->
+                    <div class="pricing-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="bg-purple-700 text-white p-6 text-center">
+                            <h3 class="text-2xl font-bold">Unlimited</h3>
+                            <p class="text-purple-100 mt-1">Trên 1000 học viên</p>
+                            <div class="mt-4">
+                                <span class="text-sm">Chỉ từ</span>
+                                <div class="text-3xl font-bold">50.000 VNĐ</div>
+                                <span class="text-sm text-purple-100">/ Học viên / Tháng</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <button class="w-full py-2 bg-purple-700 text-white rounded-md hover:bg-purple-800 mb-6">Đăng ký ngay</button>
+                            
+                            <h4 class="font-semibold text-gray-800 mb-4">Bao gồm toàn bộ công cụ của gói BASIC & Premium</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-purple-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>PC App: Phần mềm học tập trực tuyến E-Learning</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-purple-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Miễn phí số hóa toàn bộ tài liệu</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-purple-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Miễn phí tư vấn vận hành, training nhân sự</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-6 text-blue-700">So sánh chi tiết các gói dịch vụ</h3>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Tính năng</th>
+                                    <th class="py-3 px-4 border-b border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase">Basic</th>
+                                    <th class="py-3 px-4 border-b border-gray-200 bg-blue-100 text-center text-xs font-semibold text-blue-800 uppercase">Premium</th>
+                                    <th class="py-3 px-4 border-b border-gray-200 bg-purple-100 text-center text-xs font-semibold text-purple-800 uppercase">Unlimited</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200 font-medium">CRM tự động</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-purple-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200 font-medium">Quản lý học viên</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-purple-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200 font-medium">Web App: ERP</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                                        <svg class="h-5 w-5 text-red-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-purple-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200 font-medium">Web App: Education</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                                        <svg class="h-5 w-5 text-red-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-purple-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200 font-medium">Mobile App</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                                        <svg class="h-5 w-5 text-red-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-purple-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200 font-medium">PC App: E-Learning</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                                        <svg class="h-5 w-5 text-red-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
+                                        <svg class="h-5 w-5 text-red-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-purple-50">
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200 font-medium">Số hóa tài liệu</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                                        <span class="text-gray-600">Có phí</span>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
+                                        <span class="text-gray-600">Có phí</span>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-purple-50">
+                                        <span class="text-green-600 font-semibold">Miễn phí</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b border-gray-200 font-medium">Tư vấn vận hành</td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center">
+                                        <span class="text-gray-600">Cơ bản</span>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
+                                        <span class="text-gray-600">Nâng cao</span>
+                                    </td>
+                                    <td class="py-3 px-4 border-b border-gray-200 text-center bg-purple-50">
+                                        <span class="text-green-600 font-semibold">Toàn diện</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">BlueRise</h3>
+                    <p class="text-gray-400">Giải pháp chuyển đổi số toàn diện cho trung tâm đào tạo.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liên hệ</h3>
+                    <p class="text-gray-400">Email: info@bluerise.com.vn</p>
+                    <p class="text-gray-400">Điện thoại: 1900 1234</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tải ứng dụng</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-md">Google Play</a>
+                        <a href="#" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-md">App Store</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2023 BlueRise. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Tab switching
+                const tabBtns = document.querySelectorAll('.tab-btn');
+                const tabContents = document.querySelectorAll('.tab-content');
+                
+                tabBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const tabId = this.getAttribute('data-tab');
+                        
+                        // Remove active class from all buttons and contents
+                        tabBtns.forEach(btn => btn.classList.remove('active', 'bg-white', 'text-blue-600'));
+                        tabBtns.forEach(btn => btn.classList.add('bg-transparent', 'text-white'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        
+                        // Add active class to clicked button and corresponding content
+                        this.classList.add('active', 'bg-white', 'text-blue-600');
+                        this.classList.remove('bg-transparent', 'text-white');
+                        document.getElementById(tabId).classList.add('active');
+                        
+                        // Initialize charts if analytics tab is active
+                        if (tabId === 'analytics') {
+                            setTimeout(() => {
+                                initCharts();
+                            }, 100);
+                        }
+                    });
+                });
+                
+                // Simulation functionality
+                const simBtns = document.querySelectorAll('.sim-btn');
+                const simContents = document.querySelectorAll('.sim-content');
+                
+                simBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const simId = this.getAttribute('data-sim');
+                        
+                        // Remove active class from all buttons and contents
+                        simBtns.forEach(btn => {
+                            btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                            btn.classList.add('bg-gray-200', 'text-gray-700');
+                        });
+                        simContents.forEach(content => content.classList.add('hidden'));
+                        
+                        // Add active class to clicked button and corresponding content
+                        this.classList.add('active', 'bg-blue-600', 'text-white');
+                        this.classList.remove('bg-gray-200', 'text-gray-700');
+                        
+                        const simContent = document.getElementById(`${simId}-sim`);
+                        if (simContent) {
+                            simContent.classList.remove('hidden');
+                            
+                            // Reset simulation state
+                            resetSimulation(simId);
+                        }
+                    });
+                });
+                
+                // Enrollment simulation navigation
+                const enrollmentNext = document.getElementById('enrollment-next');
+                const enrollmentPrev = document.getElementById('enrollment-prev');
+                let enrollmentStep = 1;
+                
+                if (enrollmentNext && enrollmentPrev) {
+                    enrollmentNext.addEventListener('click', function() {
+                        if (enrollmentStep < 4) {
+                            enrollmentStep++;
+                            updateEnrollmentSimulation();
+                        }
+                    });
+                    
+                    enrollmentPrev.addEventListener('click', function() {
+                        if (enrollmentStep > 1) {
+                            enrollmentStep--;
+                            updateEnrollmentSimulation();
+                        }
+                    });
+                }
+                
+                // Teaching simulation navigation
+                const teachingNext = document.getElementById('teaching-next');
+                const teachingPrev = document.getElementById('teaching-prev');
+                let teachingStep = 1;
+                
+                if (teachingNext && teachingPrev) {
+                    teachingNext.addEventListener('click', function() {
+                        if (teachingStep < 4) {
+                            teachingStep++;
+                            updateTeachingSimulation();
+                        }
+                    });
+                    
+                    teachingPrev.addEventListener('click', function() {
+                        if (teachingStep > 1) {
+                            teachingStep--;
+                            updateTeachingSimulation();
+                        }
+                    });
+                }
+                
+                // Finance simulation navigation
+                const financeNext = document.getElementById('finance-next');
+                const financePrev = document.getElementById('finance-prev');
+                let financeStep = 1;
+                
+                if (financeNext && financePrev) {
+                    financeNext.addEventListener('click', function() {
+                        if (financeStep < 4) {
+                            financeStep++;
+                            updateFinanceSimulation();
+                        }
+                    });
+                    
+                    financePrev.addEventListener('click', function() {
+                        if (financeStep > 1) {
+                            financeStep--;
+                            updateFinanceSimulation();
+                        }
+                    });
+                }
+                
+                // Communication simulation navigation
+                const communicationNext = document.getElementById('communication-next');
+                const communicationPrev = document.getElementById('communication-prev');
+                let communicationStep = 1;
+                
+                if (communicationNext && communicationPrev) {
+                    communicationNext.addEventListener('click', function() {
+                        if (communicationStep < 4) {
+                            communicationStep++;
+                            updateCommunicationSimulation();
+                        }
+                    });
+                    
+                    communicationPrev.addEventListener('click', function() {
+                        if (communicationStep > 1) {
+                            communicationStep--;
+                            updateCommunicationSimulation();
+                        }
+                    });
+                }
+                
+                // Function to update enrollment simulation
+                function updateEnrollmentSimulation() {
+                    // Update progress bar
+                    const progressBar = document.getElementById('enrollment-progress');
+                    const progressText = document.getElementById('enrollment-progress-text');
+                    const progress = (enrollmentStep / 4) * 100;
+                    
+                    if (progressBar && progressText) {
+                        progressBar.style.width = `${progress}%`;
+                        progressText.textContent = `${Math.round(progress)}%`;
+                    }
+                    
+                    // Update step visibility
+                    for (let i = 1; i <= 4; i++) {
+                        const step = document.getElementById(`enrollment-step-${i}`);
+                        if (step) {
+                            if (i <= enrollmentStep) {
+                                step.classList.remove('opacity-50');
+                            } else {
+                                step.classList.add('opacity-50');
+                            }
+                        }
+                    }
+                    
+                    // Update detail content
+                    const detailContent = document.getElementById('enrollment-detail');
+                    if (detailContent) {
+                        let content = '';
+                        
+                        switch (enrollmentStep) {
+                            case 1:
+                                content = `
+                                    <p class="mb-3">Khi học viên tiềm năng điền thông tin vào form trên website hoặc mạng xã hội, BlueRise sẽ:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Tự động lưu trữ thông tin vào hệ thống CRM</li>
+                                        <li>Gửi email/SMS xác nhận đã nhận thông tin</li>
+                                        <li>Phân loại học viên theo nguồn đến (website, Facebook, Instagram...)</li>
+                                        <li>Gán nhãn tự động dựa trên thông tin đã cung cấp</li>
+                                        <li>Thông báo cho nhân viên tư vấn phụ trách</li>
+                                    </ul>
+                                    <p class="mt-3">Thời gian xử lý: <span class="font-semibold text-green-600">Dưới 1 phút</span> (so với 5-10 phút khi làm thủ công)</p>
+                                `;
+                                break;
+                            case 2:
+                                content = `
+                                    <p class="mb-3">Hệ thống BlueRise tự động phân loại học viên tiềm năng:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Phân nhóm theo độ tuổi, trình độ và nhu cầu học tập</li>
+                                        <li>Đánh giá mức độ quan tâm dựa trên tương tác</li>
+                                        <li>Gán cho nhân viên tư vấn phù hợp theo chuyên môn</li>
+                                        <li>Đề xuất khóa học phù hợp dựa trên thông tin đã cung cấp</li>
+                                        <li>Lên lịch liên hệ tự động cho nhân viên tư vấn</li>
+                                    </ul>
+                                    <p class="mt-3">Hiệu quả: <span class="font-semibold text-green-600">Tăng 35%</span> tỷ lệ chuyển đổi từ học viên tiềm năng thành học viên chính thức</p>
+                                `;
+                                break;
+                            case 3:
+                                content = `
+                                    <p class="mb-3">Nhân viên tư vấn sử dụng BlueRise để tư vấn và đăng ký:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Xem thông tin chi tiết và lịch sử tương tác của học viên</li>
+                                        <li>Tư vấn khóa học phù hợp dựa trên đề xuất của hệ thống</li>
+                                        <li>Đăng ký khóa học trực tiếp trên hệ thống</li>
+                                        <li>Tạo hợp đồng và thỏa thuận học tập điện tử</li>
+                                        <li>Gửi thông tin xác nhận đăng ký cho phụ huynh/học viên</li>
+                                    </ul>
+                                    <p class="mt-3">Thời gian xử lý: <span class="font-semibold text-green-600">5-10 phút</span> (so với 20-30 phút khi làm thủ công)</p>
+                                `;
+                                break;
+                            case 4:
+                                content = `
+                                    <p class="mb-3">Hệ thống BlueRise hỗ trợ xếp lớp và thanh toán:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Tự động đề xuất lớp học phù hợp dựa trên lịch trống của học viên</li>
+                                        <li>Tính toán học phí và áp dụng các chương trình ưu đãi</li>
+                                        <li>Xử lý thanh toán qua nhiều hình thức (tiền mặt, chuyển khoản, thẻ)</li>
+                                        <li>Tạo hóa đơn điện tử và gửi cho phụ huynh</li>
+                                        <li>Cập nhật trạng thái học viên và thông báo cho giáo viên</li>
+                                    </ul>
+                                    <p class="mt-3">Kết quả: <span class="font-semibold text-green-600">Giảm 90%</span> thời gian xử lý hành chính và <span class="font-semibold text-green-600">tăng 25%</span> tỷ lệ chuyển đổi</p>
+                                `;
+                                break;
+                        }
+                        
+                        detailContent.innerHTML = content;
+                    }
+                    
+                    // Update button states
+                    if (enrollmentPrev) {
+                        enrollmentPrev.disabled = enrollmentStep === 1;
+                    }
+                    if (enrollmentNext) {
+                        enrollmentNext.disabled = enrollmentStep === 4;
+                    }
+                }
+                
+                // Function to update teaching simulation
+                function updateTeachingSimulation() {
+                    // Update progress bar
+                    const progressBar = document.getElementById('teaching-progress');
+                    const progressText = document.getElementById('teaching-progress-text');
+                    const progress = (teachingStep / 4) * 100;
+                    
+                    if (progressBar && progressText) {
+                        progressBar.style.width = `${progress}%`;
+                        progressText.textContent = `${Math.round(progress)}%`;
+                    }
+                    
+                    // Update step visibility
+                    for (let i = 1; i <= 4; i++) {
+                        const step = document.getElementById(`teaching-step-${i}`);
+                        if (step) {
+                            if (i <= teachingStep) {
+                                step.classList.remove('opacity-50');
+                            } else {
+                                step.classList.add('opacity-50');
+                            }
+                        }
+                    }
+                    
+                    // Update detail content
+                    const detailContent = document.getElementById('teaching-detail');
+                    if (detailContent) {
+                        let content = '';
+                        
+                        switch (teachingStep) {
+                            case 1:
+                                content = `
+                                    <p class="mb-3">Khi giáo viên lập kế hoạch giảng dạy trên Blue Rise Edu:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Tạo và lưu trữ giáo án theo chuẩn của trung tâm</li>
+                                        <li>Tải lên tài liệu học tập và bài tập</li>
+                                        <li>Thiết lập mục tiêu học tập cho từng buổi học</li>
+                                        <li>Xem thông tin chi tiết về học viên trong lớp</li>
+                                        <li>Truy cập lịch sử học tập và đánh giá trước đó</li>
+                                    </ul>
+                                    <p class="mt-3">Thời gian chuẩn bị: <span class="font-semibold text-green-600">Giảm 30%</span> so với phương pháp truyền thống</p>
+                                `;
+                                break;
+                            case 2:
+                                content = `
+                                    <p class="mb-3">Hệ thống BlueRise hỗ trợ quản lý lớp học:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Tự động cập nhật danh sách học viên khi có đăng ký mới</li>
+                                        <li>Thông báo cho giáo viên về lịch dạy và thay đổi lịch</li>
+                                        <li>Gửi thông báo cho học viên về lịch học và tài liệu</li>
+                                        <li>Theo dõi điểm danh và báo cáo vắng mặt</li>
+                                        <li>Quản lý tài liệu học tập và bài tập về nhà</li>
+                                    </ul>
+                                    <p class="mt-3">Hiệu quả: <span class="font-semibold text-green-600">Giảm 80%</span> thời gian quản lý hành chính lớp học</p>
+                                `;
+                                break;
+                            case 3:
+                                content = `
+                                    <p class="mb-3">Giáo viên sử dụng Blue Rise PC App để giảng dạy trực tuyến:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Bảng đen ảo với đầy đủ công cụ vẽ và ghi chú</li>
+                                        <li>Chia sẻ tài liệu và bài giảng trực tiếp</li>
+                                        <li>Công cụ tạo game và hoạt động tương tác</li>
+                                        <li>Hệ thống trao thưởng và vinh danh học viên</li>
+                                        <li>Ghi lại buổi học để học viên xem lại sau</li>
+                                    </ul>
+                                    <p class="mt-3">Kết quả: <span class="font-semibold text-green-600">Tăng 45%</span> sự tham gia tích cực của học viên</p>
+                                `;
+                                break;
+                            case 4:
+                                content = `
+                                    <p class="mb-3">BlueRise hỗ trợ đánh giá và phản hồi:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Tạo và chấm bài kiểm tra tự động</li>
+                                        <li>Phân tích kết quả học tập của từng học viên</li>
+                                        <li>Tạo báo cáo đánh giá chi tiết cho từng buổi học</li>
+                                        <li>Gửi phản hồi tự động cho phụ huynh qua Mobile App</li>
+                                        <li>Theo dõi tiến độ học tập và đề xuất cải thiện</li>
+                                    </ul>
+                                    <p class="mt-3">Hiệu quả: <span class="font-semibold text-green-600">Giảm 70%</span> thời gian đánh giá và <span class="font-semibold text-green-600">tăng 40%</span> chất lượng phản hồi</p>
+                                `;
+                                break;
+                        }
+                        
+                        detailContent.innerHTML = content;
+                    }
+                    
+                    // Update button states
+                    if (teachingPrev) {
+                        teachingPrev.disabled = teachingStep === 1;
+                    }
+                    if (teachingNext) {
+                        teachingNext.disabled = teachingStep === 4;
+                    }
+                }
+                
+                // Function to update finance simulation
+                function updateFinanceSimulation() {
+                    // Update progress bar
+                    const progressBar = document.getElementById('finance-progress');
+                    const progressText = document.getElementById('finance-progress-text');
+                    const progress = (financeStep / 4) * 100;
+                    
+                    if (progressBar && progressText) {
+                        progressBar.style.width = `${progress}%`;
+                        progressText.textContent = `${Math.round(progress)}%`;
+                    }
+                    
+                    // Update step visibility
+                    for (let i = 1; i <= 4; i++) {
+                        const step = document.getElementById(`finance-step-${i}`);
+                        if (step) {
+                            if (i <= financeStep) {
+                                step.classList.remove('opacity-50');
+                            } else {
+                                step.classList.add('opacity-50');
+                            }
+                        }
+                    }
+                    
+                    // Update detail content
+                    const detailContent = document.getElementById('finance-detail');
+                    if (detailContent) {
+                        let content = '';
+                        
+                        switch (financeStep) {
+                            case 1:
+                                content = `
+                                    <p class="mb-3">Khi học viên đăng ký khóa học, BlueRise sẽ:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Tự động tính toán học phí dựa trên khóa học và chính sách giảm giá</li>
+                                        <li>Tạo hóa đơn điện tử và gửi cho phụ huynh qua email/app</li>
+                                        <li>Cung cấp nhiều phương thức thanh toán (tiền mặt, chuyển khoản, thẻ)</li>
+                                        <li>Ghi nhận thanh toán và cập nhật trạng thái học phí</li>
+                                        <li>Gửi thông báo nhắc nhở khi gần đến hạn thanh toán</li>
+                                    </ul>
+                                    <p class="mt-3">Hiệu quả: <span class="font-semibold text-green-600">Giảm 90%</span> thời gian xử lý học phí và <span class="font-semibold text-green-600">giảm 95%</span> sai sót</p>
+                                `;
+                                break;
+                            case 2:
+                                content = `
+                                    <p class="mb-3">BlueRise hỗ trợ quản lý chi tiêu:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Ghi nhận và phân loại các khoản chi phí theo danh mục</li>
+                                        <li>Theo dõi chi phí vận hành (tiền thuê, điện nước, văn phòng phẩm...)</li>
+                                        <li>Quản lý chi phí marketing và tuyển sinh</li>
+                                        <li>Theo dõi chi phí nhân sự và giảng dạy</li>
+                                        <li>Cảnh báo khi chi tiêu vượt ngân sách đã định</li>
+                                    </ul>
+                                    <p class="mt-3">Kết quả: <span class="font-semibold text-green-600">Giảm 25%</span> chi phí vận hành và <span class="font-semibold text-green-600">tăng 15%</span> hiệu quả sử dụng ngân sách</p>
+                                `;
+                                break;
+                            case 3:
+                                content = `
+                                    <p class="mb-3">Hệ thống tự động tính lương giáo viên:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Tự động ghi nhận giờ dạy thực tế từ hệ thống điểm danh</li>
+                                        <li>Áp dụng các chính sách lương và thưởng của trung tâm</li>
+                                        <li>Tính toán phụ cấp và các khoản thưởng thành tích</li>
+                                        <li>Tạo bảng lương chi tiết cho từng giáo viên</li>
+                                        <li>Giáo viên có thể xem thông tin lương trên Blue Rise Edu</li>
+                                    </ul>
+                                    <p class="mt-3">Hiệu quả: <span class="font-semibold text-green-600">Giảm 100%</span> sai sót tính lương và <span class="font-semibold text-green-600">giảm 80%</span> thời gian xử lý</p>
+                                `;
+                                break;
+                            case 4:
+                                content = `
+                                    <p class="mb-3">BlueRise tạo báo cáo tài chính chi tiết:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Báo cáo doanh thu theo khóa học, lớp học, giáo viên</li>
+                                        <li>Phân tích chi phí và lợi nhuận theo thời gian</li>
+                                        <li>Dự báo dòng tiền và kế hoạch tài chính</li>
+                                        <li>Biểu đồ trực quan về hiệu quả kinh doanh</li>
+                                        <li>Xuất báo cáo theo nhiều định dạng (PDF, Excel, CSV)</li>
+                                    </ul>
+                                    <p class="mt-3">Lợi ích: <span class="font-semibold text-green-600">Tiết kiệm 100%</span> thời gian lập báo cáo và <span class="font-semibold text-green-600">tăng 40%</span> hiệu quả ra quyết định</p>
+                                `;
+                                break;
+                        }
+                        
+                        detailContent.innerHTML = content;
+                    }
+                    
+                    // Update button states
+                    if (financePrev) {
+                        financePrev.disabled = financeStep === 1;
+                    }
+                    if (financeNext) {
+                        financeNext.disabled = financeStep === 4;
+                    }
+                }
+                
+                // Function to update communication simulation
+                function updateCommunicationSimulation() {
+                    // Update progress bar
+                    const progressBar = document.getElementById('communication-progress');
+                    const progressText = document.getElementById('communication-progress-text');
+                    const progress = (communicationStep / 4) * 100;
+                    
+                    if (progressBar && progressText) {
+                        progressBar.style.width = `${progress}%`;
+                        progressText.textContent = `${Math.round(progress)}%`;
+                    }
+                    
+                    // Update step visibility
+                    for (let i = 1; i <= 4; i++) {
+                        const step = document.getElementById(`communication-step-${i}`);
+                        if (step) {
+                            if (i <= communicationStep) {
+                                step.classList.remove('opacity-50');
+                            } else {
+                                step.classList.add('opacity-50');
+                            }
+                        }
+                    }
+                    
+                    // Update detail content
+                    const detailContent = document.getElementById('communication-detail');
+                    if (detailContent) {
+                        let content = '';
+                        
+                        switch (communicationStep) {
+                            case 1:
+                                content = `
+                                    <p class="mb-3">Khi có lịch học mới hoặc thay đổi lịch, BlueRise sẽ:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Gửi thông báo tự động qua Mobile App và SMS</li>
+                                        <li>Cập nhật lịch học trên ứng dụng của phụ huynh</li>
+                                        <li>Gửi nhắc nhở trước giờ học 30 phút</li>
+                                        <li>Thông báo khi học viên điểm danh vào lớp</li>
+                                        <li>Cung cấp thông tin về nội dung bài học sắp tới</li>
+                                    </ul>
+                                    <p class="mt-3">Kết quả: <span class="font-semibold text-green-600">Tăng 40%</span> tỷ lệ tham gia đúng giờ và <span class="font-semibold text-green-600">giảm 70%</span> cuộc gọi hỏi thông tin</p>
+                                `;
+                                break;
+                            case 2:
+                                content = `
+                                    <p class="mb-3">Sau mỗi buổi học, giáo viên cập nhật:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Nhận xét chi tiết về biểu hiện của học viên</li>
+                                        <li>Điểm số các bài tập và kiểm tra</li>
+                                        <li>Tiến độ học tập so với mục tiêu đã đề ra</li>
+                                        <li>Ghi chú về điểm mạnh và điểm cần cải thiện</li>
+                                        <li>Bài tập về nhà và tài liệu bổ sung</li>
+                                    </ul>
+                                    <p class="mt-3">Thời gian cập nhật: <span class="font-semibold text-green-600">5 phút/học viên</span> (so với 15 phút khi làm thủ công)</p>
+                                `;
+                                break;
+                            case 3:
+                                content = `
+                                    <p class="mb-3">Phụ huynh sử dụng Mobile App để theo dõi:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Xem nhận xét và đánh giá từ giáo viên</li>
+                                        <li>Theo dõi điểm số và tiến độ học tập</li>
+                                        <li>Kiểm tra lịch sử điểm danh và chuyên cần</li>
+                                        <li>Xem thông tin học phí và lịch thanh toán</li>
+                                        <li>Truy cập tài liệu học tập và bài tập về nhà</li>
+                                    </ul>
+                                    <p class="mt-3">Mức độ hài lòng: <span class="font-semibold text-green-600">Tăng 65%</span> so với phương pháp thông báo truyền thống</p>
+                                `;
+                                break;
+                            case 4:
+                                content = `
+                                    <p class="mb-3">BlueRise hỗ trợ tương tác hai chiều:</p>
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>Phụ huynh gửi phản hồi và câu hỏi cho giáo viên</li>
+                                        <li>Tạo đơn xin nghỉ học trực tiếp trên ứng dụng</li>
+                                        <li>Đặt lịch hẹn gặp giáo viên hoặc quản lý</li>
+                                        <li>Tham gia khảo sát và đánh giá chất lượng</li>
+                                        <li>Nhận thông báo về sự kiện và hoạt động của trung tâm</li>
+                                    </ul>
+                                    <p class="mt-3">Kết quả: <span class="font-semibold text-green-600">Tăng 80%</span> mức độ tương tác và <span class="font-semibold text-green-600">tăng 45%</span> tỷ lệ giữ chân học viên</p>
+                                `;
+                                break;
+                        }
+                        
+                        detailContent.innerHTML = content;
+                    }
+                    
+                    // Update button states
+                    if (communicationPrev) {
+                        communicationPrev.disabled = communicationStep === 1;
+                    }
+                    if (communicationNext) {
+                        communicationNext.disabled = communicationStep === 4;
+                    }
+                }
+                
+                // Function to reset simulation state
+                function resetSimulation(simId) {
+                    switch (simId) {
+                        case 'enrollment':
+                            enrollmentStep = 1;
+                            updateEnrollmentSimulation();
+                            break;
+                        case 'teaching':
+                            teachingStep = 1;
+                            updateTeachingSimulation();
+                            break;
+                        case 'finance':
+                            financeStep = 1;
+                            updateFinanceSimulation();
+                            break;
+                        case 'communication':
+                            communicationStep = 1;
+                            updateCommunicationSimulation();
+                            break;
+                    }
+                }
+                
+                // Initialize charts
+                let timeChart, costChart, enrollmentChart, satisfactionChart, roiChart;
+                
+                function initCharts() {
+                    // Destroy existing charts if they exist
+                    if (timeChart) timeChart.destroy();
+                    if (costChart) costChart.destroy();
+                    if (enrollmentChart) enrollmentChart.destroy();
+                    if (satisfactionChart) satisfactionChart.destroy();
+                    if (roiChart) roiChart.destroy();
+                    
+                    // Time savings chart
+                    const timeCtx = document.getElementById('timeChart');
+                    if (timeCtx) {
+                        timeChart = new Chart(timeCtx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Tuyển sinh', 'Quản lý lớp học', 'Báo cáo', 'Tính lương', 'Giao tiếp'],
+                                datasets: [{
+                                    label: 'Trước khi sử dụng BlueRise (phút)',
+                                    data: [45, 60, 120, 180, 30],
+                                    backgroundColor: 'rgba(156, 163, 175, 0.7)',
+                                    borderColor: 'rgba(156, 163, 175, 1)',
+                                    borderWidth: 1
+                                }, {
+                                    label: 'Sau khi sử dụng BlueRise (phút)',
+                                    data: [10, 15, 5, 15, 5],
+                                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                                    borderColor: 'rgba(59, 130, 246, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                aspectRatio: 1.5,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: 'Thời gian (phút)'
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Thời gian xử lý công việc (phút)'
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Cost reduction chart
+                    const costCtx = document.getElementById('costChart');
+                    if (costCtx) {
+                        costChart = new Chart(costCtx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Nhân sự hành chính', 'Giấy tờ, in ấn', 'Lưu trữ', 'Liên lạc', 'Đào tạo'],
+                                datasets: [{
+                                    label: 'Trước khi sử dụng BlueRise (triệu VNĐ/tháng)',
+                                    data: [30, 5, 3, 4, 8],
+                                    backgroundColor: 'rgba(156, 163, 175, 0.7)',
+                                    borderColor: 'rgba(156, 163, 175, 1)',
+                                    borderWidth: 1
+                                }, {
+                                    label: 'Sau khi sử dụng BlueRise (triệu VNĐ/tháng)',
+                                    data: [12, 0.5, 0.2, 1, 3],
+                                    backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                                    borderColor: 'rgba(16, 185, 129, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                aspectRatio: 1.5,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: 'Chi phí (triệu VNĐ/tháng)'
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Chi phí vận hành hàng tháng'
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Enrollment effectiveness chart
+                    const enrollmentCtx = document.getElementById('enrollmentChart');
+                    if (enrollmentCtx) {
+                        enrollmentChart = new Chart(enrollmentCtx, {
+                            type: 'line',
+                            data: {
+                                labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6'],
+                                datasets: [{
+                                    label: 'Trước khi sử dụng BlueRise',
+                                    data: [25, 28, 24, 30, 27, 29],
+                                    borderColor: 'rgba(156, 163, 175, 1)',
+                                    backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                                    borderWidth: 2,
+                                    fill: true,
+                                    tension: 0.3
+                                }, {
+                                    label: 'Sau khi sử dụng BlueRise',
+                                    data: [25, 32, 38, 42, 45, 48],
+                                    borderColor: 'rgba(59, 130, 246, 1)',
+                                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                    borderWidth: 2,
+                                    fill: true,
+                                    tension: 0.3
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                aspectRatio: 1.5,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: 'Tỷ lệ chuyển đổi (%)'
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Tỷ lệ chuyển đổi học viên tiềm năng'
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Satisfaction chart
+                    const satisfactionCtx = document.getElementById('satisfactionChart');
+                    if (satisfactionCtx) {
+                        satisfactionChart = new Chart(satisfactionCtx, {
+                            type: 'radar',
+                            data: {
+                                labels: [
+                                    'Chất lượng giảng dạy',
+                                    'Giao tiếp',
+                                    'Tiện ích',
+                                    'Theo dõi tiến độ',
+                                    'Thanh toán',
+                                    'Hỗ trợ'
+                                ],
+                                datasets: [{
+                                    label: 'Trước khi sử dụng BlueRise',
+                                    data: [7, 5, 4, 3, 5, 6],
+                                    backgroundColor: 'rgba(156, 163, 175, 0.2)',
+                                    borderColor: 'rgba(156, 163, 175, 1)',
+                                    borderWidth: 2,
+                                    pointBackgroundColor: 'rgba(156, 163, 175, 1)'
+                                }, {
+                                    label: 'Sau khi sử dụng BlueRise',
+                                    data: [8, 9, 9, 8, 9, 8],
+                                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                                    borderColor: 'rgba(59, 130, 246, 1)',
+                                    borderWidth: 2,
+                                    pointBackgroundColor: 'rgba(59, 130, 246, 1)'
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                aspectRatio: 1.5,
+                                scales: {
+                                    r: {
+                                        angleLines: {
+                                            display: true
+                                        },
+                                        suggestedMin: 0,
+                                        suggestedMax: 10
+                                    }
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Mức độ hài lòng (thang điểm 10)'
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    
+                    // ROI chart
+                    const roiCtx = document.getElementById('roiChart');
+                    if (roiCtx) {
+                        roiChart = new Chart(roiCtx, {
+                            type: 'line',
+                            data: {
+                                labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                                datasets: [{
+                                    label: 'Chi phí đầu tư (triệu VNĐ)',
+                                    data: [50, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+                                    borderColor: 'rgba(239, 68, 68, 1)',
+                                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                    borderWidth: 2,
+                                    fill: true
+                                }, {
+                                    label: 'Lợi ích kinh tế (triệu VNĐ)',
+                                    data: [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165],
+                                    borderColor: 'rgba(16, 185, 129, 1)',
+                                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                    borderWidth: 2,
+                                    fill: true
+                                }, {
+                                    label: 'Lợi nhuận ròng (triệu VNĐ)',
+                                    data: [-50, -55, -45, -25, 5, 40, 85, 130, 175, 220, 265, 310],
+                                    borderColor: 'rgba(59, 130, 246, 1)',
+                                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                    borderWidth: 2,
+                                    borderDash: [5, 5],
+                                    fill: false
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                aspectRatio: 2,
+                                scales: {
+                                    y: {
+                                        title: {
+                                            display: true,
+                                            text: 'Giá trị (triệu VNĐ)'
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Phân tích ROI trong năm đầu tiên'
+                                    },
+                                    annotation: {
+                                        annotations: {
+                                            line1: {
+                                                type: 'line',
+                                                yMin: 0,
+                                                yMax: 0,
+                                                borderColor: 'rgba(0, 0, 0, 0.3)',
+                                                borderWidth: 1,
+                                                borderDash: [5, 5]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+                
+                // Initialize the first simulation
+                updateEnrollmentSimulation();
+                
+                // Initialize charts if analytics tab is active by default
+                if (document.getElementById('analytics').classList.contains('active')) {
+                    setTimeout(() => {
+                        initCharts();
+                    }, 100);
+                }
+                
+                // Handle window resize for charts
+                window.addEventListener('resize', function() {
+                    if (document.getElementById('analytics').classList.contains('active')) {
+                        setTimeout(() => {
+                            initCharts();
+                        }, 100);
+                    }
+                });
+                
+                console.log("BlueRise simulation initialized successfully");
+            } catch (error) {
+                console.error("Error initializing BlueRise simulation:", error);
+            }
+        });
+    </script>
+<script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+</html>
