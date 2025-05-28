@@ -56,12 +56,12 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-6">
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-6 fixed w-full z-50 top-0">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <h1 class="text-3xl font-bold mb-4 md:mb-0">BlueRise</h1>
                 <div class="flex space-x-4">
-                    <button class="tab-btn bg-white text-blue-600 px-4 py-2 rounded-md font-medium active" data-tab="overview">Tổng quan</button>
+                    <button class="tab-btn bg-white text-blue-600 px-4 py-2 rounded-md font-medium active hover:bg-blue-700 border border-white" data-tab="overview">Tổng quan</button>
                     <button class="tab-btn bg-transparent hover:bg-blue-700 border border-white text-white px-4 py-2 rounded-md font-medium" data-tab="simulation">Mô phỏng</button>
                     <button class="tab-btn bg-transparent hover:bg-blue-700 border border-white text-white px-4 py-2 rounded-md font-medium" data-tab="analytics">Phân tích</button>
                     <button class="tab-btn bg-transparent hover:bg-blue-700 border border-white text-white px-4 py-2 rounded-md font-medium" data-tab="pricing">Bảng giá</button>
@@ -69,6 +69,9 @@
             </div>
         </div>
     </header>
+   
+    
+      
 
     <main class="container mx-auto px-4 py-8">
         <!-- Tab 1: Tổng quan -->
@@ -162,164 +165,311 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- BlueRise ERP -->
-                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden relative">
                         <div class="bg-blue-600 text-white p-4">
-                            <h3 class="text-xl font-bold">Blue Rise ERP</h3>
-                            <p class="text-blue-100">Quản trị toàn diện trung tâm đào tạo</p>
+                          <h3 class="text-xl font-bold">Blue Rise ERP</h3>
+                          <p class="text-blue-100">Quản trị toàn diện trung tâm đào tạo</p>
                         </div>
+                        <div>
+                            <img src="image/erp.png" alt="erp">
+                        </div>
+                      
+                        <!-- Nút phát video -->
+                        <button onclick="showVideoModal()" 
+                          class="absolute bottom-4 right-4 bg-blue-600 text-white rounded-full p-3 shadow-md hover:bg-blue-700 z-10">
+                          ▶️
+                        </button>
+                      
                         <div class="p-6">
-                            <div class="mb-4">
-                                <img src="/image/erp.png" alt="Blue Rise ERP" class="w-full h-auto object-cover rounded-md">
+                          <p class="text-gray-700 mb-4">
+                            Website quản trị toàn bộ hoạt động của trung tâm, chuỗi trung tâm và hành trình trải nghiệm của khách hàng.
+                          </p>
+                          <div class="space-y-2">
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>CRM và quản lý tuyển sinh</span>
                             </div>
-                            <p class="text-gray-700 mb-4">Website quản trị toàn bộ hoạt động của trung tâm, chuỗi trung tâm và hành trình trải nghiệm của khách hàng.</p>
-                            <div class="space-y-2">
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>CRM và quản lý tuyển sinh</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Quản lý lịch học và ghi danh</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Quản lý học sinh và giáo viên</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Báo cáo doanh thu và thống kê</span>
-                                </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Quản lý lịch học và ghi danh</span>
                             </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Quản lý học sinh và giáo viên</span>
+                            </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Báo cáo doanh thu và thống kê</span>
+                            </div>
+                          </div>
                         </div>
-                    </div>
+                      </div>
+                      
+                      <!-- Modal -->
+                      <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-white rounded-lg overflow-hidden relative w-full max-w-3xl mx-4">
+                          <!-- Nút đóng -->
+                          <button onclick="hideVideoModal()" 
+                            class="absolute top-2 right-2 bg-red-500 text-white rounded-full px-3 py-1 text-sm hover:bg-red-600 z-10">
+                            ❌
+                          </button>
+                      
+                          <video class="w-full h-auto" controls>
+                            <source src="video/vid1.mp4" type="video/mp4" />
+                            Trình duyệt của bạn không hỗ trợ thẻ video.
+                          </video>
+                        </div>
+                      </div>
+                      
+                      <!-- JavaScript -->
+                      <script>
+                        function showVideoModal() {
+                          document.getElementById("video-modal").classList.remove("hidden");
+                        }
+                      
+                        function hideVideoModal() {
+                          document.getElementById("video-modal").classList.add("hidden");
+                        }
+                      </script>
+                      
+                      
+                    
+
 
                     <!-- BlueRise Edu -->
-                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden relative">
                         <div class="bg-green-600 text-white p-4">
-                            <h3 class="text-xl font-bold">Blue Rise Edu</h3>
-                            <p class="text-green-100">Công cụ chuyên biệt cho giáo viên</p>
+                          <h3 class="text-xl font-bold">Blue Rise Edu</h3>
+                          <p class="text-green-100">Công cụ chuyên biệt cho giáo viên</p>
                         </div>
+                      
+                        <!-- Nút phát video -->
+                        <button onclick="showVideoEduModal()" 
+                          class="absolute bottom-4 right-4 bg-green-600 text-white rounded-full p-3 shadow-md hover:bg-green-700 z-10">
+                          ▶️
+                        </button>
+                      
                         <div class="p-6">
-                            <div class="mb-4">
-                                <img src="image/edu.png" alt="Blue Rise Edu" class="w-full h-auto object-cover rounded-md">
+                          <p class="text-gray-700 mb-4">
+                            Trang làm việc dành riêng cho giáo viên với các nhóm tính năng chuyên biệt hỗ trợ quản lý lớp học.
+                          </p>
+                          <div class="space-y-2">
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Quản lý thông tin lớp học</span>
                             </div>
-                            <p class="text-gray-700 mb-4">Trang làm việc dành riêng cho giáo viên với các nhóm tính năng chuyên biệt hỗ trợ quản lý lớp học.</p>
-                            <div class="space-y-2">
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Quản lý thông tin lớp học</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Soạn thảo bài giảng và đề thi</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Nhận xét và chấm điểm tự động</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Tra cứu dữ liệu điểm danh, công, lương</span>
-                                </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Soạn thảo bài giảng và đề thi</span>
                             </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Nhận xét và chấm điểm tự động</span>
+                            </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-green-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Tra cứu dữ liệu điểm danh, công, lương</span>
+                            </div>
+                          </div>
                         </div>
-                    </div>
+                      </div>
+                      
+                      <!-- Modal -->
+                      <div id="video-edu-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-white rounded-lg overflow-hidden relative w-full max-w-3xl mx-4">
+                          <!-- Nút đóng -->
+                          <button onclick="hideVideoEduModal()" 
+                            class="absolute top-2 right-2 bg-red-500 text-white rounded-full px-3 py-1 text-sm hover:bg-red-600 z-10">
+                            ❌
+                          </button>
+                      
+                          <video class="w-full h-auto" controls>
+                            <source src="video/vid1.mp4" type="video/mp4" />
+                            Trình duyệt của bạn không hỗ trợ thẻ video.
+                          </video>
+                        </div>
+                      </div>
+                      
+                      <!-- JavaScript -->
+                      <script>
+                        function showVideoEduModal() {
+                          document.getElementById("video-edu-modal").classList.remove("hidden");
+                        }
+                      
+                        function hideVideoEduModal() {
+                          document.getElementById("video-edu-modal").classList.add("hidden");
+                        }
+                      </script>
+                      
 
                     <!-- BlueRise PC App -->
-                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden relative">
                         <div class="bg-purple-600 text-white p-4">
-                            <h3 class="text-xl font-bold">Blue Rise PC App</h3>
-                            <p class="text-purple-100">Môi trường giảng dạy và học tập online</p>
+                          <h3 class="text-xl font-bold">Blue Rise PC App</h3>
+                          <p class="text-purple-100">Môi trường giảng dạy và học tập online</p>
                         </div>
+                      
+                        <!-- Nút phát video -->
+                        <button onclick="showVideoPCModal()" 
+                          class="absolute bottom-4 right-4 bg-purple-600 text-white rounded-full p-3 shadow-md hover:bg-purple-700 z-10">
+                          ▶️
+                        </button>
+                      
                         <div class="p-6">
-                            <div class="mb-4">
-                                <img src="image/pcapp.png" alt="Blue Rise PC App" class="w-full h-auto object-cover rounded-md">
+                          <p class="text-gray-700 mb-4">
+                            Mô phỏng 80% lớp học truyền thống với đầy đủ các công cụ tương tác hàng đầu trên thị trường.
+                          </p>
+                          <div class="space-y-2">
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Bảng đen và bộ đếm giờ</span>
                             </div>
-                            <p class="text-gray-700 mb-4">Mô phỏng 80% lớp học truyền thông với đầy đủ các công cụ tương tác hàng đầu trên thị trường.</p>
-                            <div class="space-y-2">
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Bảng đen và bộ đếm giờ</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Bộ dụng cụ học tập</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Công cụ tạo game</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Trao cúp vinh danh và công cụ cử chỉ</span>
-                                </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Bộ dụng cụ học tập</span>
                             </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Công cụ tạo game</span>
+                            </div>
+                            <div class="flex items-center">
+                              <svg class="h-5 w-5 text-purple-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span>Trao cúp vinh danh và công cụ cử chỉ</span>
+                            </div>
+                          </div>
                         </div>
-                    </div>
+                      </div>
+                      
+                      <!-- Modal PC -->
+                      <div id="video-pc-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-white rounded-lg overflow-hidden relative w-full max-w-3xl mx-4">
+                          <!-- Nút đóng -->
+                          <button onclick="hideVideoPCModal()" 
+                            class="absolute top-2 right-2 bg-red-500 text-white rounded-full px-3 py-1 text-sm hover:bg-red-600 z-10">
+                            ❌
+                          </button>
+                      
+                          <video class="w-full h-auto" controls>
+                            <source src="video/vid1.mp4" type="video/mp4" />
+                            Trình duyệt của bạn không hỗ trợ thẻ video.
+                          </video>
+                        </div>
+                      </div>
+                      
+                      <!-- JavaScript -->
+                      <script>
+                        function showVideoPCModal() {
+                          document.getElementById("video-pc-modal").classList.remove("hidden");
+                        }
+                      
+                        function hideVideoPCModal() {
+                          document.getElementById("video-pc-modal").classList.add("hidden");
+                        }
+                      </script>
+                      
+                      
 
                     <!-- BlueRise Mobile App -->
-                    <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden">
-                        <div class="bg-red-600 text-white p-4">
-                            <h3 class="text-xl font-bold">Blue Rise Mobile App</h3>
-                            <p class="text-red-100">Kết nối trung tâm, phụ huynh và học sinh</p>
-                        </div>
-                        <div class="p-6">
-                            <div class="mb-4">
-                                <img src="image/mobile.png" alt="Blue Rise Mobile App" class="w-full h-auto object-cover rounded-md">
-                            </div>
-                            <p class="text-gray-700 mb-4">Ứng dụng hoàn hảo tương tác giữa trung tâm, phụ huynh và học sinh với nhiều tính năng tiện ích.</p>
-                            <div class="space-y-2">
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Thông báo lịch học và học phí</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Đánh giá năng lực và điểm số</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Làm bài tập và kiểm tra</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    <span>Đơn xin nghỉ và sổ liên lạc điện tử</span>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Khối Mobile App -->
+                <div class="feature-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                    <div class="bg-red-600 text-white p-4">
+                      <h3 class="text-xl font-bold">Blue Rise Mobile App</h3>
+                      <p class="text-red-100">Kết nối trung tâm, phụ huynh và học sinh</p>
                     </div>
+                  
+                    <!-- Nút phát video -->
+                    <button onclick="showVideoMobileModal()" 
+                      class="absolute bottom-4 right-4 bg-red-600 text-white rounded-full p-3 shadow-md hover:bg-red-700 z-10">
+                      ▶️
+                    </button>
+                  
+                    <div class="p-6">
+                      <p class="text-gray-700 mb-4">
+                        Ứng dụng hoàn hảo tương tác giữa trung tâm, phụ huynh và học sinh với nhiều tính năng tiện ích.
+                      </p>
+                      <div class="space-y-2">
+                        <div class="flex items-center">
+                          <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Thông báo lịch học và học phí</span>
+                        </div>
+                        <div class="flex items-center">
+                          <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Đánh giá năng lực và điểm số</span>
+                        </div>
+                        <div class="flex items-center">
+                          <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Làm bài tập và kiểm tra</span>
+                        </div>
+                        <div class="flex items-center">
+                          <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Đơn xin nghỉ và sổ liên lạc điện tử</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Modal Mobile -->
+                  <div id="video-mobile-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+                    <div class="bg-white rounded-lg overflow-hidden relative w-full max-w-3xl mx-4">
+                      <!-- Nút đóng -->
+                      <button onclick="hideVideoMobileModal()" 
+                        class="absolute top-2 right-2 bg-red-500 text-white rounded-full px-3 py-1 text-sm hover:bg-red-600 z-10">
+                        ❌
+                      </button>
+                  
+                      <video class="w-full h-auto" controls>
+                        <source src="video/vid1.mp4" type="video/mp4" />
+                        Trình duyệt của bạn không hỗ trợ thẻ video.
+                      </video>
+                    </div>
+                  </div>
+                  
+                  <!-- JavaScript -->
+                  <script>
+                    function showVideoMobileModal() {
+                      document.getElementById("video-mobile-modal").classList.remove("hidden");
+                    }
+                  
+                    function hideVideoMobileModal() {
+                      document.getElementById("video-mobile-modal").classList.add("hidden");
+                    }
+                  </script>
+                  
+                  
+  
+                      
                 </div>
             </section>
 
@@ -928,8 +1078,8 @@
                                 <tr>
                                     <td class="py-3 px-4 border-b border-gray-200 font-medium">Web App: ERP</td>
                                     <td class="py-3 px-4 border-b border-gray-200 text-center">
-                                        <svg class="h-5 w-5 text-red-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        <svg class="h-5 w-5 text-green-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                         </svg>
                                     </td>
                                     <td class="py-3 px-4 border-b border-gray-200 text-center bg-blue-50">
