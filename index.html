@@ -170,8 +170,9 @@
                           <h3 class="text-xl font-bold">Blue Rise ERP</h3>
                           <p class="text-blue-100">Quản trị toàn diện trung tâm đào tạo</p>
                         </div>
+                      
                         <div>
-                            <img src="image/erp.png" alt="erp" >
+                          <img src="image/erp.png" alt="erp">
                         </div>
                       
                         <!-- Nút phát video -->
@@ -222,7 +223,7 @@
                             ❌
                           </button>
                       
-                          <video class="w-full h-auto" controls>
+                          <video id="erpVideo" class="w-full h-auto" controls>
                             <source src="video/vid1.mp4" type="video/mp4" />
                             Trình duyệt của bạn không hỗ trợ thẻ video.
                           </video>
@@ -232,13 +233,22 @@
                       <!-- JavaScript -->
                       <script>
                         function showVideoModal() {
-                          document.getElementById("video-modal").classList.remove("hidden");
+                          const modal = document.getElementById("video-modal");
+                          const video = document.getElementById("erpVideo");
+                          modal.classList.remove("hidden");
+                          video.currentTime = 0; // Bắt đầu từ đầu nếu cần
+                          video.play(); // Tự động phát nếu muốn
                         }
                       
                         function hideVideoModal() {
-                          document.getElementById("video-modal").classList.add("hidden");
+                          const modal = document.getElementById("video-modal");
+                          const video = document.getElementById("erpVideo");
+                          video.pause(); // Dừng phát
+                          video.currentTime = 0; // Reset về đầu
+                          modal.classList.add("hidden");
                         }
                       </script>
+                      
                       
                       
                     
@@ -255,10 +265,10 @@
                         </div>
                       
                         <!-- Nút phát video -->
-                        <button onclick="showVideoEduModal()" 
+                        <!-- <button onclick="showVideoEduModal()" 
                           class="absolute bottom-4 right-4 bg-green-600 text-white rounded-full p-3 shadow-md hover:bg-green-700 z-10">
                           ▶️
-                        </button>
+                        </button> -->
                       
                         <div class="p-6">
                           <p class="text-gray-700 mb-4">
@@ -327,8 +337,9 @@
                           <h3 class="text-xl font-bold">Blue Rise PC App</h3>
                           <p class="text-purple-100">Môi trường giảng dạy và học tập online</p>
                         </div>
+                      
                         <div>
-                            <img src="image/pcapp.png" alt="pc" >
+                          <img src="image/pcapp.png" alt="pc">
                         </div>
                       
                         <!-- Nút phát video -->
@@ -379,8 +390,8 @@
                             ❌
                           </button>
                       
-                          <video class="w-full h-auto" controls>
-                            <source src="video/vid1.mp4" type="video/mp4" />
+                          <video id="pcVideo" class="w-full h-auto" controls>
+                            <source src="video/vid2.mp4" type="video/mp4" />
                             Trình duyệt của bạn không hỗ trợ thẻ video.
                           </video>
                         </div>
@@ -389,13 +400,22 @@
                       <!-- JavaScript -->
                       <script>
                         function showVideoPCModal() {
-                          document.getElementById("video-pc-modal").classList.remove("hidden");
+                          const modal = document.getElementById("video-pc-modal");
+                          const video = document.getElementById("pcVideo");
+                          modal.classList.remove("hidden");
+                          video.currentTime = 0; // Bắt đầu lại từ đầu
+                          video.play(); // Bắt đầu phát (nếu muốn tự động)
                         }
                       
                         function hideVideoPCModal() {
-                          document.getElementById("video-pc-modal").classList.add("hidden");
+                          const modal = document.getElementById("video-pc-modal");
+                          const video = document.getElementById("pcVideo");
+                          video.pause(); // Dừng phát
+                          video.currentTime = 0; // Reset về đầu video
+                          modal.classList.add("hidden");
                         }
                       </script>
+                      
                       
                       
 
