@@ -426,6 +426,7 @@
                       <h3 class="text-xl font-bold">Blue Rise Mobile App</h3>
                       <p class="text-red-100">Kết nối trung tâm, phụ huynh và học sinh</p>
                     </div>
+                  
                     <div>
                       <img src="image/mobile.png" alt="mo" />
                     </div>
@@ -452,66 +453,26 @@
                       </p>
                       <div class="space-y-2">
                         <div class="flex items-center">
-                          <svg
-                            class="h-5 w-5 text-red-600 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M5 13l4 4L19 7"
-                            />
+                          <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                           </svg>
                           <span>Thông báo lịch học và học phí</span>
                         </div>
                         <div class="flex items-center">
-                          <svg
-                            class="h-5 w-5 text-red-600 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M5 13l4 4L19 7"
-                            />
+                          <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                           </svg>
                           <span>Đánh giá năng lực và điểm số</span>
                         </div>
                         <div class="flex items-center">
-                          <svg
-                            class="h-5 w-5 text-red-600 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M5 13l4 4L19 7"
-                            />
+                          <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                           </svg>
                           <span>Làm bài tập và kiểm tra</span>
                         </div>
                         <div class="flex items-center">
-                          <svg
-                            class="h-5 w-5 text-red-600 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M5 13l4 4L19 7"
-                            />
+                          <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                           </svg>
                           <span>Đơn xin nghỉ và sổ liên lạc điện tử</span>
                         </div>
@@ -520,14 +481,8 @@
                   </div>
                   
                   <!-- Modal Mobile -->
-                  <div
-                    id="video-mobile-modal"
-                    class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden"
-                  >
-                    <div
-                      class="bg-white rounded-lg overflow-hidden relative mx-4"
-                      style="width: 600px; max-width: 95vw; height: 350px;"
-                    >
+                  <div id="video-mobile-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+                    <div class="bg-white rounded-lg overflow-hidden relative mx-4" style="width: 800px; max-width: 95vw; height: 400px;">
                       <!-- Nút đóng -->
                       <button
                         onclick="hideVideoMobileModal()"
@@ -542,7 +497,7 @@
                         controls
                         style="background: black;"
                       >
-                        <source src="/video/vid4.mp4" type="video/mp4" />
+                        <source src="" type="video/mp4" />
                         Trình duyệt của bạn không hỗ trợ thẻ video.
                       </video>
                     </div>
@@ -554,9 +509,12 @@
                       const video = document.getElementById("modal-video");
                       const source = video.querySelector("source");
                   
-                      // Cập nhật source video mới
+                      // Gán lại src mới cho video
                       source.src = videoSrc;
-                      video.load(); // tải lại video
+                      video.load(); // Tải lại video mới
+                      video.currentTime = 0; // Reset thời gian về đầu (tránh auto tiếp từ chỗ cũ)
+                      video.play(); // Tùy chọn: Tự động phát
+                  
                       modal.classList.remove("hidden");
                     }
                   
@@ -564,7 +522,8 @@
                       const modal = document.getElementById("video-mobile-modal");
                       const video = document.getElementById("modal-video");
                   
-                      video.pause();
+                      video.pause(); // Dừng phát
+                      video.currentTime = 0; // Reset thời gian về đầu
                       modal.classList.add("hidden");
                     }
                   </script>
